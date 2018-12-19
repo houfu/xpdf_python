@@ -62,8 +62,13 @@ def to_text(file_loc, page_nums = True):
 			text += '***Page {}*** {}'.format(actual, t)
 			file.close()
 	else:
-		# TO BE IMPLEMENTED
-		pass
+		# Calls xpdf
+        	subprocess.call(['pdftotext', full_file_loc])
+        	# Opens file saved to disk
+        	saved_file = full_file_loc.replace('.pdf', '.txt')
+        	file = open(saved_file, 'r', encoding="ISO-8859-1")
+        	text = file.read()
+        	file.close()
 
 	# Remove file saved to disk
 	os.remove(saved_file)
